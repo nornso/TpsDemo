@@ -184,6 +184,12 @@ public struct ThirdPersonCharacterProcessor : IKinematicCharacterProcessor
         {
             // Move on ground
             float3 targetVelocity = ThirdPersonCharacterInputs.MoveVector * ThirdPersonCharacter.GroundMaxSpeed;
+
+            if (ThirdPersonCharacterInputs.Sprint)
+            {
+                targetVelocity *= ThirdPersonCharacter.SprintSpeedMultiplier;
+            }
+
             CharacterControlUtilities.StandardGroundMove_Interpolated(ref CharacterBody.RelativeVelocity, targetVelocity, ThirdPersonCharacter.GroundedMovementSharpness, DeltaTime, ThirdPersonCharacter.GroundingUp, CharacterBody.GroundHit.Normal);
 
             // Jump

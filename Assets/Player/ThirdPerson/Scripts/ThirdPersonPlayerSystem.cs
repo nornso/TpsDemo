@@ -30,6 +30,8 @@ public partial class ThirdPersonPlayerSystem : SystemBase
         moveInput.x += Input.GetKey(KeyCode.D) ? 1f : 0f;
         moveInput.x += Input.GetKey(KeyCode.A) ? -1f : 0f;
         bool jumpInput = Input.GetKeyDown(KeyCode.Space);
+        bool sprintInput = Input.GetKey(KeyCode.LeftShift);
+
         float2 cameraLookInput = new float2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         float cameraZoomInput = -Input.mouseScrollDelta.y;
 
@@ -59,6 +61,8 @@ public partial class ThirdPersonPlayerSystem : SystemBase
                     {
                         characterInputs.JumpRequested = jumpInput;
                     }
+
+                    characterInputs.Sprint = sprintInput;
 
                     SetComponent(player.ControlledCharacter, characterInputs);
                 }

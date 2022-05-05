@@ -16,6 +16,7 @@ public struct ThirdPersonCharacterComponent : IComponentData
     public float AirDrag;
     public float JumpSpeed;
     public float3 Gravity;
+    public float SprintSpeedMultiplier;
 
     [Header("Step Handling")]
     public bool StepHandling;
@@ -67,4 +68,5 @@ public struct ThirdPersonCharacterInputs : IComponentData
 {
     public float3 MoveVector;
     public bool JumpRequested;
+    public bool Sprint;
 }
