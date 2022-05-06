@@ -17,6 +17,7 @@ public struct ThirdPersonCharacterComponent : IComponentData
     public float JumpSpeed;
     public float3 Gravity;
     public float SprintSpeedMultiplier;
+    public int MaxAirJumps;
 
     [Header("Step Handling")]
     public bool StepHandling;
@@ -34,6 +35,8 @@ public struct ThirdPersonCharacterComponent : IComponentData
 
     [HideInInspector]
     public float3 GroundingUp;
+    [HideInInspector]
+    public int CurrentAirJumps;
 
     public static ThirdPersonCharacterComponent GetDefault()
     {

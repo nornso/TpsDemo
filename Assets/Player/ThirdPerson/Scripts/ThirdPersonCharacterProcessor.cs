@@ -197,12 +197,21 @@ public struct ThirdPersonCharacterProcessor : IKinematicCharacterProcessor
             {
                 CharacterControlUtilities.StandardJump(ref CharacterBody, ThirdPersonCharacter.GroundingUp * ThirdPersonCharacter.JumpSpeed, true, ThirdPersonCharacter.GroundingUp);
             }
+
+            ThirdPersonCharacter.CurrentAirJumps = 0;
         }
         else
         {
             // Move in air
             float3 airAcceleration = ThirdPersonCharacterInputs.MoveVector * ThirdPersonCharacter.AirAcceleration;
             CharacterControlUtilities.StandardAirMove(ref CharacterBody.RelativeVelocity, airAcceleration, ThirdPersonCharacter.AirMaxSpeed, ThirdPersonCharacter.GroundingUp, DeltaTime, false);
+
+            if (ThirdPersonCharacterInputs.JumpRequested && ThirdPersonCharacter.CurrentAirJumps < ThirdPersonCharacter.MaxAirJumps)
+            {
+                CharacterControlUtilities.StandardJump(ref CharacterBody, ThirdPersonCharacter.GroundingUp * ThirdPersonCharacter.JumpSpeed, true, ThirdPersonCharacter.GroundingUp);
+                ThirdPersonCharacter.CurrentAirJumps++;
+            }
+
 
             // Gravity
             CharacterControlUtilities.AccelerateVelocity(ref CharacterBody.RelativeVelocity, ThirdPersonCharacter.Gravity, DeltaTime);
